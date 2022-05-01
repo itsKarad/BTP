@@ -1,0 +1,5 @@
+{"_id":{"$oid":"620de6a166a49065e7613ff7"},"email":"adityakarad28@gmail.com","name":"Aditya Karad","password":"$2a$10$pLOC7EwAMqRP1FRA2D4PIeoqcnUJ3CbZFIqsgc2RA0Xksi8/eOM3u","date":{"$date":"2022-02-17T06:09:37.54Z"},"__v":0}
+{"_id":{"$oid":"620de9fc73740837d2ba41a5"},"email":"akarad@ee.iitr.ac.in","name":"Aditya Karad","password":"$2a$10$wPzyLizy04ACUBdRajIlPOI9A7vvkKyz.sR/qol8DxtTV5UBtFS0i","date":{"$date":"2022-02-17T06:23:56.709Z"},"__v":0}
+{"_id":{"$oid":"620e0f48698cdee681793941"},"email":"sbhawsar@ee.iitr.ac.in","name":"Shivang Bhawsar","password":"$2a$10$EPFtf4o9kHaZQ7Ypj6XqkuoxgSk1IVx69nio4lKZxTUvFGblYeh/C","date":{"$date":"2022-02-17T09:03:04.95Z"},"__v":0}
+{"_id":{"$oid":"620e0fb9698cdee68179394e"},"email":"dhusain@ee.iitr.ac.in","name":"Dawar Husain","password":"$2a$10$BDJcRHc39fbSd0a1MBH.IOD9wooAguYCm9CnSUKGsjaX9QnuHcn9a","date":{"$date":"2022-02-17T09:04:57.299Z"},"__v":0}
+{"_id":{"$oid":"620e15db698cdee681793a3c"},"email":"jonti26kumar@gmail.com","name":"Jonti Kumawat","password":"$2a$10$YUtjEaijW31w2DRhX5CC4e63AHVj32EHXCSR72ogydivoZrKGpNx.","date":{"$date":"2022-02-17T09:31:07.891Z"},"__v":0}

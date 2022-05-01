@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="<%= page.description %> ">
+    <title><%= page.name %> </title>
+    <link href="/page/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body class="entire-body">
+    <%- include("../components/navbar.ejs")  %> 
+    <% if (user && user.isAdmin) { %>   
+        <%-  include("../components/badge.ejs")  %> 
+    <% } %>
+    <div class="container breadcrumb-container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item active" aria-current="page"><a class = "breadcrumb-link" href = "/">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page"><a class = "breadcrumb-link" href = "#"><%=page.name %> </a></li>
+            </ol>
+        </nav>
+    </div>
+    <% function convert(str) {
+        var date = new Date(str),
+          mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+          day = ("0" + date.getDate()).slice(-2);
+        return [day, mnth, date.getFullYear()].join("-");
+      } %> 
+    <div class = "container">
+        <div class="section-header">   
+            <h1 class = "section-h1-tag"><%= page.name %> </h1>
+            <p class="page-description"><%= page.description %></p>
+
+            <p class="page-details">Created by <strong><%= page.authorName %></strong> at <%= convert(page.createdAt) %></p>
+        </div> 
+        <div class="guidelines-container">
+            
+            <div class="section-header">   
+                <h2 class="section-h2-tag">Safety guidelines</h2>
+            </div>
+            <div class = "sorting-container">
+                <a href = "?guidelineSort=latest" id="guideline-latest-sort-button" class="sorting-button">Sort by latest</a>
+                <a href = "?guidelineSort=oldest" id="guideline-oldest-sort-button" class="sorting-button">Sort by oldest</a>
+            </div>
+            <% if (page.guidelines) { %>
+                <% for( let i = 0; i < page.guidelines.length; i++ ) { %>
+                    <div class = "guideline-container">                        
+                        <li id = "guideline_<%= page.guidelines[i].id %>"  class = "guideline"><%= page.guidelines[i].text %> </li>
+                        <% if (page.guidelines[i].source) { %>
+                            <p class = "source"><strong>Source: </strong><%= page.guidelines[i].source %> </p>
+                        <% } %>
+                        <div class="guideline-footer">
+                            <p style="margin-right: 2rem;">-By <strong><%= page.guidelines[i].authorName %> </strong> on <%= convert(page.guidelines[i].createdAt) %> </p>
+                            <% if (user && ( user.isAdmin || user.id == page.guidelines[i].authorId)) { %>
+                                <a style="margin-right: 2rem;" href="/page/<%=page.id%>/guideline/<%=page.guidelines[i]._id%>" class = "btn btn-warning">Edit</a>
+                                <form action="/page/<%=page.id%>/guideline/<%=page.guidelines[i]._id%>?_method=DELETE" method="POST">
+                                    <button class = "btn btn-danger">Delete</button>
+                                </form>
+                            <% } %>
+                        </div>
+                        <% if (i!=page.guidelines.length-1) { %>
+                            <hr class = "divider"/>
+                        <% } %>
+                        
+                    </div>
+                <% } %>
+            <% } %>
+            
+            <a class="btn-black" href="/page/<%=page.id%>/new-guideline">+ Contribute</a> 
+        </div>    
+        <hr>
+        <div class="standard-values-container">
+            <div class="section-header">   
+                <h2 class="section-h2-tag">Standard Specifications</h2>
+            </div>
+            <div class = "sorting-container">
+                <a href = "?specificationSort=latest" id="specification-latest-sort-button" class="sorting-button">Sort by latest</a>
+                <a href = "?specificationSort=oldest" id="specification-oldest-sort-button" class="sorting-button">See by oldest</a>
+            </div>
+            <div class="row g-0">   
+                <% if (page.standards) { %>
+                    <% for( let i = 0; i < page.standards.length; i++ ) { %>
+                        <div class="col-sm-6 col-md-4">
+                            <div class="grid-card" id = "standard_<%= page.standards[i].id %>">
+                                <div class="standardText">
+                                    <p><%= page.standards[i].text %></p>
+                                </div>
+                                <div class="standardValue">
+                                    <%= page.standards[i].value %>
+                                </div>
+                                <div class = "grid-card-footer">
+                                    <p>-By <strong><%= page.standards[i].authorName %></strong> </p>
+                                    <% if (page.standards[i].source) { %>
+                                        <p><strong>Source:</strong> <%= page.standards[i].source %>  </p>
+                                    <% } %>
+                                    <% if (user && ( user.isAdmin || user.id == page.standards[i].authorId)) { %>
+                                        <form action="/page/<%=page._id%>/standard/<%=page.standards[i]._id%>?_method=DELETE" method="POST">
+                                            <button class = "btn btn-danger">Delete</button>
+                                        </form>
+                                    <% } %>
+                                </div>
+                                
+                            </div>                        
+                        </div>
+                    <% } %>
+                <% } %>             
+                
+                <div class="col-sm-6 col-md-4 standards-form hidden">
+                    <div class="grid-card">
+                        <form method="POST" action="/page/<%=page._id%>/standards" class="needs-validation" novalidate>
+                            <div class="mb-3 standardText" style="font-weight: 700";>
+                                Add your own!
+                            </div>
+                            <div class="mb-3">
+                                <input name="standardText" type="text" class="form-control" id="standardText" placeholder="Label" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Provide a label!
+                                </div>
+                            </div>
+                            <div class="mb-3">
+                                <input name="standardValue" type="text" class="form-control" id="standardValue" placeholder="Value" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Provide a value!
+                                </div>
+                            </div>  
+                            <div class="mb-3">
+                                <input name="standardSource" type="text" class="form-control" id="standardSource" placeholder="Source" required>
+                                <div class="valid-feedback">
+                                    Looks good!
+                                </div>
+                                <div class="invalid-feedback">
+                                    Provide a source!
+                                </div>
+                            </div>  
+                            <button type="submit" class="btn btn-primary">Contribute</button>                      
+                        </form>   
+                    </div>                    
+                </div>
+                <div class="col-sm-6 col-md-4" id="contribute-to-standards-button">
+                    <div class="grid-card">
+                        <button class="btn-black">+ Contribute</button> 
+                    </div>                                  
+                </div>
+            </div>
+        </div>        
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="/page/script.js"></script>
+</body>
+</html>

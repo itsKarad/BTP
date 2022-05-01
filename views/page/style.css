@@ -1,0 +1,206 @@
+.col-sm-6{
+    overflow:-moz-hidden-unscrollable;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    text-align: center;
+
+}
+.sorting-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.sorting-button{
+    margin-left: 1rem;
+    margin-right: 1rem;
+    text-decoration: none;
+    color: black;
+    padding: 10px;
+    border-radius: 10px;
+}
+.sorting-button:hover{
+    color: black;
+}
+
+.active-button{
+    background-color: #337edf !important; 
+    color: white !important;
+}
+
+.entire-body{
+    background-color: rgb(255, 255, 255);
+    /* font-family: Inter,Helvetica,Apple Color Emoji,Segoe UI Emoji,NotoColorEmoji,Noto Color Emoji,Segoe UI Symbol,Android Emoji,EmojiSymbols,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Noto Sans,sans-serif; */
+}
+.grid-card{
+    padding: 7%;
+    margin: 5%;
+    border: 3px solid #FFFFFF;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    box-shadow: 0 10px 40px -10px rgba(0,0,0,0.15) !important;
+}
+.standardText{
+    font-size: 1.3rem;
+    font-weight: 600;
+    letter-spacing: -0.04rem;
+}
+.standardValue{
+    font-size: 2.2rem;
+    font-weight: 700;
+    letter-spacing: -0.1rem;
+}
+.guidelines-container{
+    margin: 5%;
+}
+.guideline-container{
+    margin-bottom: 2rem;
+}
+.standard-values-container{
+    margin: 5%;
+}
+.guideline-footer{
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+}
+.divider{
+    background-color: #BBBBBB;
+}
+.section-header{
+    margin-top: 3%;   
+    margin-bottom: 3%;
+
+}
+.section-h2-tag{
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: -0.04rem;
+}
+.section-h1-tag{
+    font-size: 3rem;
+    font-weight: 700;
+    text-align: center;
+    /* margin-bottom: 4%;
+    margin-top: 4%; */
+}
+
+.section-h4-tag{
+    font-size: 3rem;
+    font-weight: 800;
+}
+.guideline-form-container{
+    margin-top: 3%;
+}
+.standards-form input{
+    width: 80%;
+    margin: 0 auto;
+}
+li.guideline{
+    font-size: 1.25rem;
+    padding: 0.3rem; 
+    white-space: pre-wrap;   
+}
+
+.hidden{
+    display: none !important;
+}
+.hide{
+    visibility: collapse;
+}
+#contribute-to-standards-button button{
+    width: 70%;
+    margin: 0 auto;
+    
+}
+#contribute-to-standards-button div{
+    border: none;
+    box-shadow: none !important;
+}
+#contribute-to-guidelines-button{
+    margin-top: 3%;
+    margin-bottom: 3%;
+}
+.page-description{
+    text-align: center;
+    margin-top: 3%;
+    font-size: 1.25rem;
+}
+.page-details{
+    text-align: center;
+    margin-top: 2%;
+    margin-bottom: 6%;
+    font-size: 1.1rem;
+    color: rgba(143, 155, 168, 1);
+    margin-bottom: 5%;
+}
+.breadcrumb-container{
+    margin-top: 3%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.btn-black {
+	padding: 12px 12px;
+    font-weight: 600;
+    background-color: #0b5ed7;
+    font-size: 1.1rem;
+    color: white;
+    border-radius: 7px;
+    border: 2px rgb(19, 52, 78) solid;
+    transition: transform 250ms cubic-bezier(.2,.8,.4,1);
+    text-decoration: none;  
+  }
+
+.btn-black:hover {
+	transform: scale(1.10) !important;
+    color:white;    
+}
+
+.btn-black:active {
+	transform: scale(0.9);
+}
+.breadcrumb-link{
+    text-decoration: none;
+    color: #0b5ed7; 
+    font-size: 1.2rem;
+}
+.breadcrumb-link:hover{
+    text-decoration: solid !important; 
+}
+
+.no-results-text{
+    color: red;
+    text-align: center;
+    font-size: 1.2rem;
+}
+
+.parent-container{
+    margin-bottom: 3rem;
+    margin-top: 1rem;
+    font-size: 1.3rem;
+}
+
+/* Navbar styles */
+#searchForm{
+    display: flex;
+    flex-direction: row;
+}
+.nav-link{
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+.navbar-brand{
+    font-size: 1.7rem !important;
+    font-weight: 600;
+    letter-spacing: 0.03rem;
+}
+.navbar{
+    border-radius: 20px;
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+    padding: 2%;
+    background-color: #ffffff !important;
+    margin-bottom: 4rem;
+    margin-top: 1rem;
+}

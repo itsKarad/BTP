@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTP Safety Platform</title>
+    <meta name="description" content="A platform which raises awareness & educates users about safety guidelines, safety regulations & standard specifications, where anyone can contribute guidelines and specifications.">
+    <link href="/module/style.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+<body>   
+    <% function convert(str) {
+        var date = new Date(str),
+          mnth = ("0" + (date.getMonth() + 1)).slice(-2),
+          day = ("0" + date.getDate()).slice(-2);
+        return [day, mnth, date.getFullYear()].join("-");
+      } %> 
+    <%- include("../components/navbar.ejs")  %> 
+    <% if (user && user.isAdmin) { %>   
+        <%-  include("../components/badge.ejs")  %> 
+    <% } %>
+    
+    <div class="container">
+        <div class="section-header">   
+            <h1 class = "section-h1-tag">List of pages</h1>
+        </div> 
+        <div class = "sorting-container">
+            <a href = "/?sort=latest" id="latest-sort-button" class="sorting-button">See latest pages</a>
+            <a href = "/?sort=oldest" id="oldest-sort-button" class="sorting-button">See oldest pages</a>
+        </div>
+        <div class="pages-container">
+            <% for( let i = 0; i < pages.length; i++ ) { %>
+                <div class="page-container">
+                    <div class="page-details">
+                        <div class = "page-title-container">
+                            <a class="page-title" href="/page/<%-pages[i].id%>">📄  <%= pages[i].name %></a>
+                        </div>
+                        <div class = "page-time-container">
+                            By <%= pages[i].authorName %> 
+                        </div>
+                        <div class = "page-author-container">
+                            <%= convert(pages[i].createdAt) %> 
+                        </div>
+                        
+                        <div class="page-functions">
+                            <% if (user && (user.isAdmin || user.id == pages[i].authorId)) { %>
+                                <a class = "btn btn-warning" href="/page/<%-pages[i].id%>/edit">Edit</a>
+                                <form action="/page/<%=pages[i].id%>?_method=DELETE" method="POST">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            <% } %>  
+                        </div>   
+                        
+                    </div>                   
+                                                    
+                </div>                 
+            <% } %>
+        </div>
+        <button class="btn-black" id="show-add-page-form-button">+ Add page</button>
+        <div class="page-form-container hidden">
+            <form method="POST" action="/page" class="needs-validation" novalidate>
+                <div class="section-h4-tag mb-3">
+                    Create a new page
+                </div>                    
+                <div class="mb-3">
+                    <label for="pageTitle" class="form-label">Page Title</label>
+                    <input name="pageTitle" class="form-control" id="pageTitle" placeholder="Eg: Fire safety at home" required></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Title must not be blank!
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="pageDescription" class="form-label">A short description</label>
+                    <textarea name="pageDescription" class="form-control" id="pageDescription" rows="3" required></textarea>
+                    <div class="valid-feedback">
+                        Looks good!
+                    </div>
+                    <div class="invalid-feedback">
+                        Description must not be empty!
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Create page</button>
+            </form>
+        </div>
+        
+    </div>  
+    <script src="https://kit.fontawesome.com/ade69e9b58.js" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    <script src="/module/script.js"></script>
+</body>
+</html>
